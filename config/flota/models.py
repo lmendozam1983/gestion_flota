@@ -18,6 +18,15 @@ class Asignacion(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     fecha_asignacion = models.DateField(auto_now_add=True)
     fecha_devolucion = models.DateField(auto_now=True)
+    
+    class Meta:
+        permissions = (
+                ("development", "Puede desarrollar"),
+                ("scrum_master", "Es Scrum Master"),
+                ("visualizar_listado", "visualizar listado"),
+                ("superuser", "superuser" )
+        )
+    
     estado = models.CharField(
         choices=[('Activa', 'activa'), ('Completada', 'completada'), ('Cancelada', 'cancelada')],
         max_length=50

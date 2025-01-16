@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% include "menu.html" %}
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Lista de Vehículos</h1>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark text-center">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Patente</th>
+                    <th scope="col">Capacidad</th>
+                    <th scope="col">Disponibilidad</th>
+                    <th scope="col">Ajustes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vehiculo in vehiculos %}
+                    <tr>
+                        <th scope="row" class="text-center">{{ vehiculo.id }}</th>
+                        <td>{{ vehiculo.marca }}</td>
+                        <td>{{ vehiculo.modelo }}</td>
+                        <td>{{ vehiculo.patente }}</td>
+                        <td>{{ vehiculo.capacidad }}</td>
+                        <td>
+                            {% if vehiculo.disponible %}
+                                <span class="badge bg-success">Disponible</span>
+                            {% else %}
+                                <span class="badge bg-danger">No disponible</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-center">
+                            <a href="/flota/vehiculos/editar/{{ vehiculo.id }}" class="btn btn-warning btn-sm">Editar</a>
+                            <a href="/flota/vehiculos/eliminar/{{ vehiculo.id }}" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que quieres eliminar este vehículo? Esta acción no se puede deshacer.')">Eliminar</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="7" class="text-center">No hay vehículos registrados.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center mt-4">
+        <a href="/flota/vehiculos/nuevo" class="btn btn-primary">Agregar Nuevo Vehículo</a>
+    </div>
+</div>
+{% include 'footer.html' %}
+{% endblock %}
+

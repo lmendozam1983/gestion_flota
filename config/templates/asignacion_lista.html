@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% include "menu.html" %}
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Gestión de Asignaciones</h1>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark text-center">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Vehículo</th>
+                    <th scope="col">Fecha Inicio</th>
+                    <th scope="col">Fecha Fin</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Ajustes</th>
+                    <th scope="col">Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for asignacion in asignaciones %}
+                    <tr>
+                        <th scope="row" class="text-center">{{ asignacion.id }}</th>
+                        <td>{{ asignacion.usuario }}</td>
+                        <td>{{ asignacion.vehiculo }}</td>
+                        <td>{{ asignacion.fecha_asignacion }}</td>
+                        <td>{{ asignacion.fecha_desasignacion }}</td>
+                        <td class="text-center">
+                            {% if asignacion.estado == 'Activo' %}
+                                <span class="badge bg-success">Activo</span>
+                            {% else %}
+                                <span class="badge bg-danger">Inactivo</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-center">
+                            <a href="/flota/asignaciones/editar/{{ asignacion.id }}" class="btn btn-warning btn-sm">Editar</a>
+                        </td>
+                        <td class="text-center">
+                            <a href="/flota/asignaciones/eliminar/{{ asignacion.id }}" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que quieres eliminar esta asignación? Esta acción no se puede deshacer.')">Eliminar</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="8" class="text-center">No hay asignaciones registradas.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center mt-4">
+        <a href="/flota/asignaciones/nueva" class="btn btn-primary">Agregar Nueva Asignación</a>
+    </div>
+</div>
+
+{% include 'footer.html' %}
+
+{% endblock %}

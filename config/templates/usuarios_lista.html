@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load bootstrap5 %}
+
+{% include 'menu.html' %}
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Lista de Usuarios</h1>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark text-center">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                    <tr>
+                        <th scope="row" class="text-center">{{ usuario.id }}</th>
+                        <td>{{ usuario }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="2" class="text-center">No hay usuarios registrados.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center mt-4">
+        <a href="/flota/usuarios/nuevo" class="btn btn-primary">Agregar Nuevo Usuario</a>
+    </div>
+</div>
+
+{% include "footer.html" %}
+{% endblock %}
