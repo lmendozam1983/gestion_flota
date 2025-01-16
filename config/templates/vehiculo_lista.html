@@ -25,20 +25,20 @@
                 {% for vehiculo in vehiculos %}
                     <tr>
                         <th scope="row" class="text-center">{{ vehiculo.id }}</th>
-                        <td>{{ vehiculo.marca }}</td>
+                        <td><b>{{ vehiculo.marca }}</b></td>
                         <td>{{ vehiculo.modelo }}</td>
                         <td>{{ vehiculo.patente }}</td>
-                        <td>{{ vehiculo.capacidad }}</td>
+                        <td>{{ vehiculo.capacidad_carga }}</td>
                         <td>
                             {% if vehiculo.disponible %}
-                                <span class="badge bg-success">Disponible</span>
+                                <span class="badge bg-success rounded-pill"><b>Disponible</b></span>
                             {% else %}
-                                <span class="badge bg-danger">No disponible</span>
+                                <span class="badge bg-danger rounded-pill"></b>No disponible</b></span>
                             {% endif %}
                         </td>
                         <td class="text-center">
-                            <a href="/flota/vehiculos/editar/{{ vehiculo.id }}" class="btn btn-warning btn-sm">Editar</a>
-                            <a href="/flota/vehiculos/eliminar/{{ vehiculo.id }}" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que quieres eliminar este vehículo? Esta acción no se puede deshacer.')">Eliminar</a>
+                            <a href="/flota/vehiculos/editar/{{ vehiculo.id }}" class="btn btn-warning btn-sm rounded-pill"><b>Editar</b></a>
+                            <a href="/flota/vehiculos/eliminar/{{ vehiculo.id }}" class="btn btn-danger btn-sm rounded-pill" onclick="return confirm('¿Estás seguro de que quieres eliminar este vehículo? Esta acción no se puede deshacer.')"><b>Eliminar</b></a>
                         </td>
                     </tr>
                 {% empty %}
@@ -50,7 +50,7 @@
         </table>
     </div>
     <div class="text-center mt-4">
-        <a href="/flota/vehiculos/nuevo" class="btn btn-primary">Agregar Nuevo Vehículo</a>
+        <a href="/flota/vehiculos/nuevo" class="btn btn-primary rounded-pill">Agregar Nuevo Vehículo</a>
     </div>
 </div>
 {% include 'footer.html' %}
